@@ -30,6 +30,25 @@
   justify-content: center;
   display: flex;
   padding: 6px;
+  font-size: 24px;
+  font-weight: 800;
+  border-radius: 4px;
+}
+
+.letter#green{
+  background-color: #1a701a;
+}
+
+.letter#yellow{
+  background-color: #cf9b1b;
+}
+
+.letter#grey{
+  background-color: #646b70;
+}
+
+.letter#red{
+  background-color: #b01c1c;
 }
 
 .celebration {

@@ -10,10 +10,10 @@ export default class Board extends Component {
           <div className="row" key={rowIndex}>
             {Array.from({ length: NumberOfLetters }).map((_, letterIndex) => (
               <Letter
+                {...this.props}
                 key={letterIndex}
                 letterPos={letterIndex}
                 attemptVal={rowIndex}
-                board={this.props.board}
               />
             ))}
           </div>

@@ -2,8 +2,12 @@ import logo from "./logo.svg";
 import "./App.css";
 import Board from "./Components/Board";
 import { Component, useState } from "react";
-import { boardDefault, NumberOfAttempts, NumberOfLetters } from "./Constants";
-import Lottie from "lottie-react";
+import {
+  boardDefault,
+  colorBoard,
+  NumberOfAttempts,
+  NumberOfLetters,
+} from "./Constants";
 import wordBank from "./WordBank.txt";
 import Celebration from "./Components/Celebration";
 import GameOver from "./Components/GameOver";
@@ -13,6 +17,7 @@ class App extends Component {
     super(props);
     this.state = {
       board: boardDefault,
+      colors: colorBoard,
       currAttempt: 0,
       letterPos: 0,
       celebration: false,
@@ -28,11 +33,10 @@ class App extends Component {
     this.getWordsData();
 
     document.addEventListener("keydown", (e) => {
-      // console.log(">>e", e?.key, e);
       let key = e?.key;
+
       if (!this.state.celebration && !this.state.gameOver) {
         if (key == "Enter") {
-          console.log(">>enter");
           this.onEnter();
         } else if (key == "Backspace") {
           this.onClear();
@@ -66,8 +70,7 @@ class App extends Component {
   }
 
   onEnter() {
-    let { board, currAttempt, letterPos } = this.state;
-    // console.log(">>leter", letterPos);
+    let { board, currAttempt, letterPos, colors } = this.state;
 
     if (letterPos == NumberOfLetters) {
       let inputArr = board[currAttempt];
@@ -76,6 +79,13 @@ class App extends Component {
       let wordIncluded = this.wordsSet.has(entered.toLowerCase());
 
       if (correctWord) {
+        let colorsTemp = [...this.state.colors];
+        colorsTemp[currAttempt] = colorsTemp[currAttempt].map((it) => "green");
+
+        this.setState({
+          colors: colorsTemp,
+        });
+
         setTimeout(() => {
           this.setState({
             celebration: true,
@@ -84,25 +94,30 @@ class App extends Component {
       } else if (!wordIncluded) {
         alert("Word not available");
       } else if (this.state.currAttempt + 1 === NumberOfAttempts) {
+        let colorsTemp = [...this.state.colors];
+        colorsTemp[currAttempt] = colorsTemp[currAttempt].map((it) => "red");
+
+        this.setState({
+          colors: colorsTemp,
+        });
         this.setState({
           gameOver: true,
         });
       } else {
+        let colorsTemp = colors;
         for (let i = 0; i < NumberOfLetters; i++) {
           if (inputArr[i] === this.selectedWord[i]) {
-            console.log(">>green", i);
-            //turn green
+            colorsTemp[currAttempt][i] = "green";
           } else if (this.selectedWord.includes(inputArr[i])) {
-            console.log(">>yellow", i);
-
-            //turn yellow
+            colorsTemp[currAttempt][i] = "yellow";
           } else {
-            //do nothing
+            colorsTemp[currAttempt][i] = "grey";
           }
         }
         this.setState({
           currAttempt: this.state.currAttempt + 1,
           letterPos: 0,
+          colors: colorsTemp,
         });
       }
     }
@@ -110,7 +125,6 @@ class App extends Component {
 
   onClear() {
     let { board, currAttempt, letterPos } = this.state;
-    console.log(">>leter", letterPos);
 
     if (letterPos > 0) {
       board[currAttempt][letterPos - 1] = "";
@@ -122,10 +136,16 @@ class App extends Component {
   }
 
   reset = () => {
-    console.log(">>boardDefault", boardDefault);
-
     this.setState({
       board: [
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+      ],
+      colors: [
         ["", "", "", "", ""],
         ["", "", "", "", ""],
         ["", "", "", "", ""],
@@ -141,7 +161,7 @@ class App extends Component {
     });
 
     this.selectedWord = this.updateSelectedWord(this.WordsArray);
-    console.log(">>this.selectedWord", this.selectedWord);
+    console.log(">>selectedWord", this.selectedWord);
   };
 
   render() {
@@ -153,7 +173,7 @@ class App extends Component {
           <GameOver reset={this.reset} selectedWord={this.selectedWord} />
         )}
         <div className="main-container">
-          <Board board={this.state.board} />
+          <Board board={this.state.board} colorBoard={this.state.colors} />
         </div>
       </div>
     );

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 export default class Letter extends Component {
   render() {
-    const { board, attemptVal, letterPos } = this.props;
+    const { board, attemptVal, letterPos, colorBoard } = this.props;
 
-    return <div className="letter">{board[attemptVal][letterPos]}</div>;
+    return <div className="letter" id={colorBoard?.[attemptVal]?.[letterPos]}>{board[attemptVal][letterPos]}</div>;
   }
 }
