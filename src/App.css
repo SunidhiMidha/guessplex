@@ -31,3 +31,34 @@
   display: flex;
   padding: 6px;
 }
+
+.celebration {
+  position: absolute;
+  bottom: 50px;
+  align-self: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 40px;
+}
+
+.celebration-button {
+  margin-top: 50px;
+  border-radius: 12px;
+  padding: 12px 24px;
+  background-color: #6495ed;
+  color: white;
+  font-weight: 700;
+  border: none;
+  font-size: 18px;
+}
+
+.small-text {
+  font-size: 20px;
+  margin-top: 12px;
+}
+
+.game-over-lottie {
+  height: 600px;
+  width: 600px;
+}
