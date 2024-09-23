@@ -11,6 +11,7 @@ import wordBank from "./WordBank.txt";
 import Celebration from "./Components/Celebration";
 import GameOver from "./Components/GameOver";
 import HowToPlay from "./Components/HowToPlay";
+import KeyBoard from "./Components/KeyBoard";
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class App extends Component {
       celebration: false,
       gameOver: false,
       score: 0,
+      doneLetters: {}
     };
 
     this.WordsArray = [];
@@ -36,23 +38,7 @@ class App extends Component {
 
     document.addEventListener("keydown", (e) => {
       let key = e?.key;
-
-      if (!this.state.celebration && !this.state.gameOver) {
-        if (key === "Enter") {
-          this.onEnter();
-        } else if (key === "Backspace") {
-          this.onClear();
-        } else if (/^[a-zA-Z]$/.test(key)) {
-          let { board, currAttempt, letterPos } = this.state;
-          if (letterPos < NumberOfLetters) {
-            board[currAttempt][letterPos] = key.toUpperCase() || "";
-            this.setState({
-              board: board,
-              letterPos: letterPos + 1,
-            });
-          }
-        }
-      }
+      this.selectLetter(key);
     });
   }
 
@@ -95,6 +81,7 @@ class App extends Component {
 
       if (correctWord) {
         this.updateScore();
+        this.updateKeyboard(inputArr);
         let colorsTemp = [...this.state.colors];
         colorsTemp[currAttempt] = colorsTemp[currAttempt].map((it) => "green");
         this.setState((prev) => ({
@@ -110,6 +97,7 @@ class App extends Component {
       } else if (!wordIncluded) {
         alert("Word not available");
       } else if (this.state.currAttempt + 1 === NumberOfAttempts) {
+        this.updateKeyboard(inputArr);
         let colorsTemp = [...this.state.colors];
         colorsTemp[currAttempt] = colorsTemp[currAttempt].map((it) => "red");
 
@@ -120,6 +108,7 @@ class App extends Component {
           gameOver: true,
         });
       } else {
+        this.updateKeyboard(inputArr);
         let colorsTemp = colors;
         for (let i = 0; i < NumberOfLetters; i++) {
           if (inputArr[i] === this.selectedWord[i]) {
@@ -137,6 +126,14 @@ class App extends Component {
         });
       }
     }
+  }
+
+  updateKeyboard(input) {
+    let {doneLetters}=this.state;
+    input.forEach(element => {
+      doneLetters[element] = "grey"
+    });
+    this.setState({doneLetters})
   }
 
   onClear() {
@@ -171,20 +168,43 @@ class App extends Component {
       ],
       currAttempt: 0,
       letterPos: 0,
-
       celebration: false,
       gameOver: false,
+      doneLetters: {}
     });
 
     this.selectedWord = this.updateSelectedWord(this.WordsArray);
     console.log(">>selectedWord", this.selectedWord);
   };
 
+  selectLetter = (key) => {
+    if (!this.state.celebration && !this.state.gameOver) {
+      if (key === "Enter" || key == "ENTER") {
+        this.onEnter();
+      } else if (key === "Backspace" || key == "DELETE") {
+        this.onClear();
+      } else if (/^[a-zA-Z]$/.test(key)) {
+        let { board, currAttempt, letterPos } = this.state;
+        if (letterPos < NumberOfLetters) {
+          board[currAttempt][letterPos] = key.toUpperCase() || "";
+          this.setState({
+            board: board,
+            letterPos: letterPos + 1,
+          });
+        }
+      }
+    }
+  };
+
   render() {
     return (
       <div className="App">
         <div className="app-title">GuessPlex - Wordle Clone</div>
-        <HowToPlay/>
+        <HowToPlay />
+        {
+          (!!this.state.celebration || !!this.state.gameOver) &&
+          <div className="overlay"/>
+        }
         {!!this.state.celebration && <Celebration reset={this.reset} />}
         {!!this.state.gameOver && (
           <GameOver reset={this.reset} selectedWord={this.selectedWord} />
@@ -192,6 +212,7 @@ class App extends Component {
         <div className="score-text">Your Score: {this.state.score}</div>
         <div className="main-container">
           <Board board={this.state.board} colorBoard={this.state.colors} />
+          <KeyBoard selectLetter={this.selectLetter} doneLetters={this.state.doneLetters}/>
         </div>
       </div>
     );
