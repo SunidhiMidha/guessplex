@@ -1,7 +1,8 @@
 A clone of NewYork Times Wordle Game.
 Demo - [play online](https://guessplex---wordle-clone.web.app/)
 
-<img width="300" alt="Screenshot 2024-09-23 at 05 48 54" src="https://github.com/user-attachments/assets/825cc071-215c-484e-a999-ed1e34e7d41a"><img width="300" alt="Screenshot 2024-09-23 at 05 49 11" src="https://github.com/user-attachments/assets/ddd84217-5ebd-4716-9c0d-8623f5dcf353"><img width="300" alt="Screenshot 2024-09-23 at 05 50 16" src="https://github.com/user-attachments/assets/18fad870-8442-4ee5-be0d-6331517a91f2">
+<img width="451" alt="Screenshot 2024-09-23 at 06 01 23" src="https://github.com/user-attachments/assets/e207724a-7e10-4309-bc8d-aeb8a3d9fb7f">  <img width="451" alt="Screenshot 2024-09-23 at 06 01 37" src="https://github.com/user-attachments/assets/733b75de-b304-4c38-8199-ce0e4ad5c0a4">  <img width="451" alt="Screenshot 2024-09-23 at 06 02 00" src="https://github.com/user-attachments/assets/c2585338-4772-4622-bfc5-cd53d0341866">
+
 
 
 # Getting Started with Create React App
