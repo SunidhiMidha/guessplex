@@ -11,7 +11,7 @@ export default class Celebration extends Component {
           animationData={celebration_lottie}
           className="lottie"
         />
-        CONGRATULATIONS!!
+        <div style={{marginBottom:-20}}>CONGRATULATIONS!!</div>
         <button className="celebration-button" onClick={this.props.reset}>
           RESET
         </button>

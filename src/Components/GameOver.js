@@ -9,7 +9,7 @@ export default class GameOver extends Component {
         <Lottie
           loop={true}
           animationData={game_over}
-          className="game-over-lottie"
+          className="lottie"
         />
         <div className="small-text">
           Correct Word is: {this.props.selectedWord}

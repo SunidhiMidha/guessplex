@@ -10,6 +10,7 @@ import {
 import wordBank from "./WordBank.txt";
 import Celebration from "./Components/Celebration";
 import GameOver from "./Components/GameOver";
+import HowToPlay from "./Components/HowToPlay";
 
 class App extends Component {
   constructor(props) {
@@ -183,6 +184,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="app-title">GuessPlex - Wordle Clone</div>
+        <HowToPlay/>
         {!!this.state.celebration && <Celebration reset={this.reset} />}
         {!!this.state.gameOver && (
           <GameOver reset={this.reset} selectedWord={this.selectedWord} />

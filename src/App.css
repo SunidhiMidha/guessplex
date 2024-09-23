@@ -33,22 +33,35 @@
   font-size: 24px;
   font-weight: 800;
   border-radius: 4px;
+  color: white;
 }
 
 .letter#green {
   background-color: #1a701a;
+  border: none;
+  height: 52px;
+  width: 52px;
 }
 
 .letter#yellow {
   background-color: #cf9b1b;
+  border: none;
+  height: 52px;
+  width: 52px;
 }
 
 .letter#grey {
   background-color: #646b70;
+  border: none;
+  height: 52px;
+  width: 52px;
 }
 
 .letter#red {
   background-color: #b01c1c;
+  border: none;
+  height: 52px;
+  width: 52px;
 }
 
 .celebration {
@@ -77,7 +90,7 @@
   margin-top: 12px;
 }
 
-.game-over-lottie {
+.lottie {
   height: 600px;
   width: 600px;
 }
@@ -91,4 +104,77 @@
   margin-top: 16px;
   font-weight: 600;
   color: #a7c7e7;
+}
+
+.help-container {
+  position: absolute;
+  right: 16px;
+}
+
+.help-icon {
+  height: 30px;
+}
+
+.help-title {
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.help-content {
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.help-button {
+  background: none;
+  border: 1px dotted #191970;
+  font-size: 18px;
+  color: #191970;
+  border-radius: 12px;
+  margin-top: 6px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
