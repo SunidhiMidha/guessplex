@@ -21,6 +21,7 @@ class App extends Component {
       letterPos: 0,
       celebration: false,
       gameOver: false,
+      score: 0,
     };
 
     this.WordsArray = [];
@@ -30,6 +31,7 @@ class App extends Component {
 
   componentDidMount() {
     this.getWordsData();
+    this.getScore();
 
     document.addEventListener("keydown", (e) => {
       let key = e?.key;
@@ -68,6 +70,19 @@ class App extends Component {
     return wordArr[Math.floor(Math.random() * wordArr.length)].toUpperCase();
   }
 
+  getScore() {
+    let score = window.localStorage.getItem("guessPlex_score");
+    if (!!score && parseInt(score) > 0) {
+      this.setState({
+        score: parseInt(score),
+      });
+    }
+  }
+
+  updateScore() {
+    window.localStorage.setItem("guessPlex_score", this.state.score + 1);
+  }
+
   onEnter() {
     let { board, currAttempt, letterPos, colors } = this.state;
 
@@ -78,12 +93,13 @@ class App extends Component {
       let wordIncluded = this.wordsSet.has(entered.toLowerCase());
 
       if (correctWord) {
+        this.updateScore();
         let colorsTemp = [...this.state.colors];
         colorsTemp[currAttempt] = colorsTemp[currAttempt].map((it) => "green");
-
-        this.setState({
+        this.setState((prev) => ({
           colors: colorsTemp,
-        });
+          score: prev.score + 1,
+        }));
 
         setTimeout(() => {
           this.setState({
@@ -166,11 +182,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        GuessPlex - Wordle Clone
+        <div className="app-title">GuessPlex - Wordle Clone</div>
         {!!this.state.celebration && <Celebration reset={this.reset} />}
         {!!this.state.gameOver && (
           <GameOver reset={this.reset} selectedWord={this.selectedWord} />
         )}
+        <div className="score-text">Your Score: {this.state.score}</div>
         <div className="main-container">
           <Board board={this.state.board} colorBoard={this.state.colors} />
         </div>

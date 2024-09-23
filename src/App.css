@@ -35,19 +35,19 @@
   border-radius: 4px;
 }
 
-.letter#green{
+.letter#green {
   background-color: #1a701a;
 }
 
-.letter#yellow{
+.letter#yellow {
   background-color: #cf9b1b;
 }
 
-.letter#grey{
+.letter#grey {
   background-color: #646b70;
 }
 
-.letter#red{
+.letter#red {
   background-color: #b01c1c;
 }
 
@@ -80,4 +80,15 @@
 .game-over-lottie {
   height: 600px;
   width: 600px;
+}
+
+.app-title {
+  color: #dfe9f2;
+  font-size: 30px;
+  font-weight: 600;
+}
+.score-text {
+  margin-top: 16px;
+  font-weight: 600;
+  color: #a7c7e7;
 }
