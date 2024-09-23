@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Board from "./Components/Board";
-import { Component, useState } from "react";
+import { Component } from "react";
 import {
   boardDefault,
   colorBoard,
@@ -36,9 +35,9 @@ class App extends Component {
       let key = e?.key;
 
       if (!this.state.celebration && !this.state.gameOver) {
-        if (key == "Enter") {
+        if (key === "Enter") {
           this.onEnter();
-        } else if (key == "Backspace") {
+        } else if (key === "Backspace") {
           this.onClear();
         } else if (/^[a-zA-Z]$/.test(key)) {
           let { board, currAttempt, letterPos } = this.state;
@@ -72,7 +71,7 @@ class App extends Component {
   onEnter() {
     let { board, currAttempt, letterPos, colors } = this.state;
 
-    if (letterPos == NumberOfLetters) {
+    if (letterPos === NumberOfLetters) {
       let inputArr = board[currAttempt];
       let entered = inputArr.reduce((prev, curr) => prev + curr, "");
       let correctWord = entered === this.selectedWord;
