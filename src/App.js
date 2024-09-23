@@ -167,7 +167,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        GuessPlex - Wordle Clone App
+        GuessPlex - Wordle Clone
         {!!this.state.celebration && <Celebration reset={this.reset} />}
         {!!this.state.gameOver && (
           <GameOver reset={this.reset} selectedWord={this.selectedWord} />
