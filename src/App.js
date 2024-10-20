@@ -24,7 +24,7 @@ class App extends Component {
       celebration: false,
       gameOver: false,
       score: 0,
-      doneLetters: {}
+      doneLetters: {},
     };
 
     this.WordsArray = [];
@@ -129,11 +129,11 @@ class App extends Component {
   }
 
   updateKeyboard(input) {
-    let {doneLetters}=this.state;
-    input.forEach(element => {
-      doneLetters[element] = "grey"
+    let { doneLetters } = this.state;
+    input.forEach((element) => {
+      doneLetters[element] = "grey";
     });
-    this.setState({doneLetters})
+    this.setState({ doneLetters });
   }
 
   onClear() {
@@ -170,7 +170,7 @@ class App extends Component {
       letterPos: 0,
       celebration: false,
       gameOver: false,
-      doneLetters: {}
+      doneLetters: {},
     });
 
     this.selectedWord = this.updateSelectedWord(this.WordsArray);
@@ -199,21 +199,28 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="app-title">GuessPlex - Wordle Clone</div>
-        <HowToPlay />
-        {
-          (!!this.state.celebration || !!this.state.gameOver) &&
-          <div className="overlay"/>
-        }
+        <div>
+          <div className="app-title">GuessPlex - Wordle Clone</div>
+          <HowToPlay />
+          {(!!this.state.celebration || !!this.state.gameOver) && (
+            <div className="overlay" />
+          )}
+
+          <div className="score-text">Your Score: {this.state.score}</div>
+        </div>
+        <div className="main-container">
+          <Board board={this.state.board} colorBoard={this.state.colors} />
+        </div>
+        <div className="main-container">
+          <KeyBoard
+            selectLetter={this.selectLetter}
+            doneLetters={this.state.doneLetters}
+          />
+        </div>
         {!!this.state.celebration && <Celebration reset={this.reset} />}
         {!!this.state.gameOver && (
           <GameOver reset={this.reset} selectedWord={this.selectedWord} />
         )}
-        <div className="score-text">Your Score: {this.state.score}</div>
-        <div className="main-container">
-          <Board board={this.state.board} colorBoard={this.state.colors} />
-          <KeyBoard selectLetter={this.selectLetter} doneLetters={this.state.doneLetters}/>
-        </div>
       </div>
     );
   }
